@@ -85,11 +85,17 @@ def problem2a(circle, rectangle, window):
     y1=rectangle.corner_1.y
     y2=rectangle.corner_2.y
     if y2>y1 and x2>x1:
-        line=rg.Line(rg.Point(x1,y2),rg.Point(x2,y1))
+        line=rg.Line(rg.Point(x2,y1),rg.Point(x1,y2))
+        line.arrow='last'
+        line.attach_to(window)
+    elif y2<y1 and x2>x1:
+        line = rg.Line(rg.Point(x2, y2), rg.Point(x1, y1))
+        line.arrow = 'last'
         line.attach_to(window)
     else:
-        line = rg.Line(rg.Point(x1, y1), rg.Point(x2, y2))
+        line = rg.Line(rg.Point(x1, y1),rg.Point(x2, y2))
         line.attach_to(window)
+        line.arrow='last'
     window.render()
     window.get_next_mouse_click()
     circle.fill_color=rectangle.outline_color
