@@ -3,8 +3,8 @@ PRACTICE Exam 1, problem 2.
 
 Authors: David Mutchler, Vibha Alangar, Matt Boutell, Dave Fisher,
          Valerie Galluzzi, Mark Hays, Amanda Stouder, Aaron Wilkin,
-         their colleagues, and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues, and Robert Kreft.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE..
 
 import rosegraphics as rg
 
@@ -74,6 +74,28 @@ def run_test_problem2a():
 
 
 def problem2a(circle, rectangle, window):
+    circle.attach_to(window)
+    rectangle.attach_to(window)
+    window.render()
+    window.get_next_mouse_click()
+    circle.attach_to(window)
+    rectangle.attach_to(window)
+    x1=rectangle.corner_1.x
+    x2=rectangle.corner_2.x
+    y1=rectangle.corner_1.y
+    y2=rectangle.corner_2.y
+    if y2>y1 and x2>x1:
+        line=rg.Line(rg.Point(x1,y2),rg.Point(x2,y1))
+        line.attach_to(window)
+    else:
+        line = rg.Line(rg.Point(x1, y1), rg.Point(x2, y2))
+        line.attach_to(window)
+    window.render()
+    window.get_next_mouse_click()
+    circle.fill_color=rectangle.outline_color
+    window.render()
+
+
     """
     See   problem2a_picture.pdf   in this project for pictures
     that may help you better understand the following specification:
@@ -145,10 +167,32 @@ def run_test_problem2b():
 
 
 def problem2b(rect, n, delta, win):
+    rect.attach_to(win)
+    x1=rect.corner_1.x
+    x2=rect.corner_2.x
+    y1 = rect.corner_1.y
+    y2 = rect.corner_2.y
+    if x1<x2 and y1<y2:
+        for k in range(n-1):
+            rectangle=rg.Rectangle(rg.Point(x1-delta*(k+1),y1-delta*(k+1)),rg.Point(x2+delta*(k+1),y2+delta*(k+1)))
+            rectangle.attach_to(win)
+    elif x1>x2 and y1>y2:
+        for k in range(n-1):
+            rectangle = rg.Rectangle(rg.Point(x1 + delta * (k + 1), y1 + delta * (k + 1)),rg.Point(x2 - delta * (k + 1), y2 - delta * (k + 1)))
+            rectangle.attach_to(win)
+    elif x1<x2 and y1>y2:
+        for k in range(n-1):
+            rectangle = rg.Rectangle(rg.Point(x1 - delta * (k + 1), y1 + delta * (k + 1)),rg.Point(x2 + delta * (k + 1), y2 - delta * (k + 1)))
+            rectangle.attach_to(win)
+    else:
+        for k in range(n-1):
+            rectangle = rg.Rectangle(rg.Point(x1 + delta * (k + 1), y1 - delta * (k + 1)),rg.Point(x2 - delta * (k + 1), y2 + delta * (k + 1)))
+            rectangle.attach_to(win)
+    win.render()
     """
     See   problem2b_picture.pdf   in this project for pictures
     that may help you better understand the following specification:
-    
+
     What comes in:
       -- An rg.Rectangle.
       -- A positive integer n.
@@ -188,3 +232,4 @@ def problem2b(rect, n, delta, win):
 # Calls  main  to start the ball rolling.
 # -----------------------------------------------------------------------------
 main()
+

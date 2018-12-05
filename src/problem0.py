@@ -9,8 +9,8 @@ These problems illustrate concepts that previous problems have not emphasized:
 
 Authors: David Mutchler, Vibha Alangar, Matt Boutell, Dave Fisher,
          Valerie Galluzzi, Mark Hays, Amanda Stouder, Aaron Wilkin,
-         their colleagues, and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues, and Robert Kreft.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 import testing_helper
@@ -25,7 +25,7 @@ def main():
 
 
 ###############################################################################
-# TODO: 2.  READ the green doc-string for the:
+# DONE: 2.  READ the green doc-string for the:
 #   - is_prime
 #   - sum_of_digits
 # functions defined below.  You do NOT need to understand their
@@ -174,6 +174,14 @@ def run_test_problem0a():
 
 
 def problem0a(n):
+    #number=sum_of_digits(n)
+    #if number%2==1:
+    #    return True
+    #else:
+    #    return False
+
+    #Alternative:
+    return (sum_of_digits(n)%2)==1
     """
     What comes in:  An integer.
     What goes out:
@@ -189,7 +197,7 @@ def problem0a(n):
            since (2 + 4 + 6) is 12, which is NOT odd.
     """
     # -------------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #          Tests have been written for you (above).
     #
     ###########################################################################
@@ -246,6 +254,7 @@ def run_test_problem0b():
 
 
 def problem0b(n):
+
     """
     What comes in:  An integer n >= 2.
     What goes out:
@@ -262,7 +271,7 @@ def problem0b(n):
            since there are 46 primes between 2 and 200.
      """
     # -------------------------------------------------------------------------
-    # TODO: 4. Implement and test this function.
+    # DONE: 4. Implement and test this function.
     #          Tests have been written for you (above).
     #
     ###########################################################################
@@ -271,7 +280,11 @@ def problem0b(n):
     #    **  use (call) the   is_prime   function that is DEFINED ABOVE.
     ###########################################################################
     # ------------------------------------------------------------------
-
+    count=0
+    for k in range (n-1):
+        if is_prime(k+2):
+            count=count+1
+    return count
 
 def run_test_problem0c():
     """ Tests the   problem0c  function. """
@@ -307,6 +320,16 @@ def run_test_problem0c():
 
 
 def problem0c(circle, n, window):
+    circle.attach_to(window)
+    diameter=circle.radius*2
+    x=circle.center.x+diameter
+    y=circle.center.y
+    for _ in range(n):
+        c=rg.Circle(rg.Point(x,y),circle.radius)
+        c.attach_to(window)
+        window.render(0.5)
+        x=x+diameter
+
     """
     See   problem0c_picture.pdf   in this project for pictures
     that may help you better understand the following specification:
@@ -330,7 +353,7 @@ def problem0c(circle, n, window):
       :type window: rg.RoseWindow
     """
     # -------------------------------------------------------------------------
-    # TODO: 5. Implement and test this function.
+    # DONE: 5. Implement and test this function.
     #          Tests have been written for you (above).
     #
     ###########################################################################
@@ -385,3 +408,4 @@ except Exception:
     print()
     time.sleep(1)
     raise
+
