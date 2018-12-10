@@ -80,22 +80,11 @@ def problem2a(circle, rectangle, window):
     window.get_next_mouse_click()
     circle.attach_to(window)
     rectangle.attach_to(window)
-    x1=rectangle.corner_1.x
-    x2=rectangle.corner_2.x
-    y1=rectangle.corner_1.y
-    y2=rectangle.corner_2.y
-    if y2>y1 and x2>x1:
-        line=rg.Line(rg.Point(x2,y1),rg.Point(x1,y2))
-        line.arrow='last'
-        line.attach_to(window)
-    elif y2<y1 and x2>x1:
-        line = rg.Line(rg.Point(x2, y2), rg.Point(x1, y1))
-        line.arrow = 'last'
-        line.attach_to(window)
-    else:
-        line = rg.Line(rg.Point(x1, y1),rg.Point(x2, y2))
-        line.attach_to(window)
-        line.arrow='last'
+    p1=rectangle.get_upper_right_corner()
+    p2=rectangle.get_lower_left_corner()
+    line=rg.Line(p1,p2)
+    line.arrow='last'
+    line.attach_to(window)
     window.render()
     window.get_next_mouse_click()
     circle.fill_color=rectangle.outline_color
